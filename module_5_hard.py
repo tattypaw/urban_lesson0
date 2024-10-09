@@ -56,7 +56,7 @@ class UrTube:
         for video in UrTube.videos:
             if keyword.lower() in video.title.lower():
                 find.append(video.title)
-        print(find)
+        return find
 
     def watch_video(self, keyword):
         if self.current_user != None:

@@ -2,14 +2,21 @@ import math
 
 class Figure:
     sides_count = 0
-    def __init__(self, color, sides, filled = False):
+    def __init__(self, color, *sides, filled = False):
         self.__color = list(color)
-        if isinstance(sides, int):
-            self.__sides = []
+        count = 0
+        self.__sides = []
+        for side in sides:
+            count += 1
+        if count == self.sides_count:
+            for side in sides:
+                self.__sides.append(side)
+        elif count == 1:
             for i in range(self.sides_count):
-                self.__sides.append(sides)
+                self.__sides.append(list(sides)[0])
         else:
-            self.__sides = list(sides)
+            for i in range(self.sides_count):
+                self.__sides.append(1)
         self.filled = filled
 
     def get_color(self):
@@ -78,7 +85,6 @@ class Cube(Figure):
     sides_count = 12
     def __init__(self, color, sides):
         super().__init__(color, sides)
-        #self.__color = __color
         self.__sides = []
         for i in range(12):
             self.__sides.append(self._Figure__sides[0])

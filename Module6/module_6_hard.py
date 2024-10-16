@@ -4,20 +4,18 @@ class Figure:
     sides_count = 0
     def __init__(self, color, *sides, filled = False):
         self.__color = list(color)
-        count = 0
         self.__sides = []
-        for side in sides:
-            count += 1
-        if count == self.sides_count:
+        sides = list(*sides)
+        if self.__is_valid_sides(*sides):
             for side in sides:
                 self.__sides.append(side)
-        elif count == 1:
-            for i in range(self.sides_count):
-                self.__sides.append(list(sides)[0])
         else:
+            if len(sides) > 1:
+                side = 1
+            else:
+                side = sides[0]
             for i in range(self.sides_count):
-                self.__sides.append(1)
-        self.filled = filled
+                self.__sides.append(side)
 
     def get_color(self):
         return self.__color
@@ -65,7 +63,7 @@ class Figure:
 
 class Circle(Figure):
     sides_count = 1
-    def __init__(self, color, sides):
+    def __init__(self, color, *sides):
         super().__init__(color, sides)
         self.radius = self._Figure__sides[0]/2/math.pi
 
@@ -74,7 +72,7 @@ class Circle(Figure):
 
 class Triangle(Figure):
     sides_count = 3
-    def __init__(self, color, sides):
+    def __init__(self, color, *sides):
         super().__init__(color, sides)
 
     def get_square(self):
@@ -83,7 +81,7 @@ class Triangle(Figure):
 
 class Cube(Figure):
     sides_count = 12
-    def __init__(self, color, sides):
+    def __init__(self, color, *sides):
         super().__init__(color, sides)
         self.__sides = []
         for i in range(12):
@@ -115,10 +113,17 @@ print(len(circle1))
 # Проверка объёма (куба):
 print(cube1.get_volume())
 
+# Проверка треугольника
 triangle1 = Triangle((250, 15, 56), (3, 4, 5))
 print(triangle1.get_color())
+
 triangle1.set_color(89,56,200)
 print(triangle1.get_color())
+
 triangle1.set_sides(3,4,2)
 print(triangle1.get_sides())
+
 print(len(triangle1))
+
+triangle2 = Triangle((200, 200, 100), 10, 6)
+print(triangle2.get_sides())

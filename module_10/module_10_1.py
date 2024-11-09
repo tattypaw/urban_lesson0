@@ -29,5 +29,10 @@ thread3.start()
 thread4 = threading.Thread(target=write_words, args=(100, 'example8.txt'))
 thread4.start()
 
+thread1.join()
+thread2.join()
+thread3.join()
+thread4.join()
+
 ending = time()
 print('Работа потоков', ending - start)

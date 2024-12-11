@@ -17,9 +17,11 @@ class TournamentTest(unittest.TestCase):
     def tearDownClass(cls):
         for value in cls.all_results.values():
             i=0
+            print('{', end='')
             for k, v in value.items():
                 if i == len(value)-1:
-                    print(f'{k}: {v}')
+                    print(f'{k}: {v}', end = '')
+                    print('}')
                 else:
                     print(f'{k}: {v}', end = ', ')
                 i +=1

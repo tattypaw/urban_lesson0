@@ -16,6 +16,8 @@ class TournamentTest(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         for value in cls.all_results.values():
+            print(f'{value}')
+            '''
             i=0
             print('{', end='')
             for k, v in value.items():
@@ -25,6 +27,7 @@ class TournamentTest(unittest.TestCase):
                 else:
                     print(f'{k}: {v}', end = ', ')
                 i +=1
+                '''
 
     def test_Usane_Nick(self):
         tour = Tournament(90, self.runner1, self.runner3)

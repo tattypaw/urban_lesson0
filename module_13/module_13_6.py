@@ -8,13 +8,19 @@ api = ''
 bot = Bot(token = api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
+button1_1 = KeyboardButton(text='Рассчитать')
+button2_1 = KeyboardButton(text='Информация')
+kb_1 = ReplyKeyboardMarkup(keyboard=[
+        [button1_1,
+         button2_1]
+    ], resize_keyboard = True)
 
-button1 = InlineKeyboardButton(text='Рассчитать норму калорий', callback_data='calories')
-button2 = InlineKeyboardButton(text='Формулы расчёта', callback_data='formulas')
-kb = InlineKeyboardMarkup(
+button1_2 = InlineKeyboardButton(text='Рассчитать норму калорий', callback_data='calories')
+button2_2 = InlineKeyboardButton(text='Формулы расчёта', callback_data='formulas')
+kb_2 = InlineKeyboardMarkup(
     inline_keyboard=[
-        [button1,
-         button2]
+        [button1_2,
+         button2_2]
     ], resize_keyboard = True
 )
 
@@ -25,7 +31,7 @@ class UserState(StatesGroup):
 
 @dp.message_handler(text = 'Рассчитать')
 async def main_menu(message):
-    await message.answer("Выберите опцию:", reply_markup=kb)
+    await message.answer("Выберите опцию:", reply_markup=kb_2)
 
 @dp.callback_query_handler(text='formulas')
 async def get_formulas(call):
@@ -61,7 +67,7 @@ async def send_calories(message, state):
 
 @dp.message_handler(commands = ['start'])
 async def start(message):
-    await message.answer('Привет! Я бот, помогающий твоему здоровью.')
+    await message.answer('Привет! Я бот, помогающий твоему здоровью.', reply_markup=kb_1)
 
 @dp.message_handler(text = 'Информация')
 async def set_age(message):

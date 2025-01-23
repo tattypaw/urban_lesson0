@@ -39,9 +39,7 @@ async def update_users(user_id: Annotated[int, Path(ge=1, le=100, description='E
 @app.delete('/user/{user_id}')
 async def delete_user(user_id: Annotated[int, Path(ge=1, le=100, description='Enter User ID', example='1')]):
     num = len(users)
-    print(user_id)
     for i, user in enumerate(users):
-        print(user.id == user_id)
         if user.id == user_id:
             num = i
     if num == len(users):
